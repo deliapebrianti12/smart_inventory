@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "977212658692",
+    "project_id": "smart-inventory-alsakina-99a9b",
+    "storage_bucket": "smart-inventory-alsakina-99a9b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:977212658692:android:2b481ca5d7dea38a8b5151",
+        "android_client_info": {
+          "package_name": "com.example.smart_inventory"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZJQROaLze7K-sM9mlX-fH3DRsN0iKKEo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:977212658692:android:e0184a3fe1acb16f8b5151",
+        "android_client_info": {
+          "package_name": "com.example.smart_inventory_alsakina"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZJQROaLze7K-sM9mlX-fH3DRsN0iKKEo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

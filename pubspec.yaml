@@ -1,0 +1,65 @@
+name: smart_inventory
+description: "A new Flutter project for Alsakina Smart Inventory."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.1.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  # --- UI & Fonts ---
+  google_fonts: ^6.2.1
+  cupertino_icons: ^1.0.8
+
+  # --- State Management ---
+  provider: ^6.1.1
+
+  # --- Firebase Core, Auth & Storage ---
+  firebase_core: ^3.0.0
+  firebase_auth: ^5.0.0
+  firebase_storage: ^12.1.0  # WAJIB untuk fitur Upload Foto Produk
+
+  # --- Database & Scanner ---
+  cloud_firestore: ^5.0.0
+  qr_flutter: ^4.1.0
+  mobile_scanner: ^7.2.0
+  
+  # --- Storage, Image Picker & Gallery ---
+  image_picker: ^1.1.1       # WAJIB untuk ambil foto dari Kamera/Galeri
+  screenshot: ^3.0.0
+  gal: ^2.3.2                # Menggantikan image_gallery_saver (lebih stabil)
+  permission_handler: ^12.0.1
+  path_provider: ^2.1.2
+  path: ^1.9.0               # Untuk mengelola ekstensi file foto
+  intl: ^0.20.2
+  url_launcher: ^6.3.2
+  universal_html: ^2.3.0
+  
+  # --- TAMBAHAN UNTUK FITUR PRINT/PDF ---
+  pdf: ^3.10.0
+  printing: ^5.11.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+  # TAMBAHKAN INI UNTUK GENERATE IKON
+  flutter_launcher_icons: ^0.13.1
+
+# KONFIGURASI LOGO ALSAKINA
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/logo/logo.png" 
+  adaptive_icon_background: "#5D4037" # Warna cokelat sesuai tema AppBar Anda
+  adaptive_icon_foreground: "assets/logo/logo.png"
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/logo/logo.png
