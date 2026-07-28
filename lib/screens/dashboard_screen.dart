@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart'; 
 import '../models/user_model.dart'; 
 import 'list_product_screen.dart'; 
-import 'add_product_screen.dart';  
 import 'scanner_screen.dart';       
 import 'history_screen.dart';       
 import 'report_screen.dart';       
