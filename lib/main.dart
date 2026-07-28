@@ -27,14 +27,11 @@ class AlsakinaApp extends StatelessWidget {
           primary: Colors.brown[700],
         ),
         
-        // --- PERBAIKAN DI SINI ---
-        // Ganti DialogTheme menjadi DialogThemeData
         dialogTheme: const DialogThemeData(
           backgroundColor: Colors.white,
           surfaceTintColor: Colors.white,
           elevation: 5,
         ),
-        // -------------------------
 
         useMaterial3: true,
       ),
