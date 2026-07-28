@@ -14,7 +14,7 @@ import 'package:smart_inventory/screens/login_screen.dart';
 void main() {
   testWidgets('Smart Inventory smoke test - Loading LoginScreen', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+    await tester.pumpWidget(const AlsakinaApp());
 
     // Verify that the LoginScreen is loaded by checking for the application brand title.
     expect(find.text('ALSAKINA'), findsOneWidget);
