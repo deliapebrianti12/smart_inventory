@@ -14,7 +14,7 @@ jobs:
     steps:
       # Langkah 1: Checkout Source Code
       - name: 1. Checkout Source Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Langkah 2: Setup Java & Flutter (Install Dependencies)
       - name: Set up Java
@@ -26,7 +26,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.x' # Atau sesuaikan dengan versi Flutter yang Anda gunakan
+          flutter-version: '3.x'
           channel: 'stable'
 
       - name: 2. Install Dependencies
@@ -46,7 +46,7 @@ jobs:
 
       # Langkah 6: Deployment Artifact (Upload APK ke GitHub)
       - name: 6. Upload Build Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: release-apk
           path: build/app/outputs/flutter-apk/app-release.apk
