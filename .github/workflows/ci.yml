@@ -1,0 +1,52 @@
+name: CI/CD Pipeline Inventory Busana Muslimah
+
+# Pipeline akan berjalan otomatis saat ada 'push' atau 'pull request' ke branch main
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Langkah 1: Checkout Source Code
+      - name: 1. Checkout Source Code
+        uses: actions/checkout@v3
+
+      # Langkah 2: Setup Java & Flutter (Install Dependencies)
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.x' # Atau sesuaikan dengan versi Flutter yang Anda gunakan
+          channel: 'stable'
+
+      - name: 2. Install Dependencies
+        run: flutter pub get
+
+      # Langkah 3: Flutter Analyze
+      - name: 3. Flutter Analyze
+        run: flutter analyze
+
+      # Langkah 4: Flutter Test
+      - name: 4. Flutter Test
+        run: flutter test
+
+      # Langkah 5: Build APK
+      - name: 5. Build APK
+        run: flutter build apk --release
+
+      # Langkah 6: Deployment Artifact (Upload APK ke GitHub)
+      - name: 6. Upload Build Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: release-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
