@@ -26,7 +26,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   // State Kategori & List Varian yang Ditambahkan
   String _selectedCategory = "Atasan";
   final List<String> _categories = ["Atasan", "Bawahan", "Gamis", "Hijab", "Mukena"];
-  List<String> _varianList = [];
+  final List<String> _varianList = [];
 
   @override
   void initState() {
@@ -43,6 +43,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
           .limit(1)
           .get();
 
+      if (!mounted) return;
+
       if (snapshot.docs.isNotEmpty) {
         String lastCode = snapshot.docs.first['kode_barang'];
         int lastNumber = int.parse(lastCode.replaceAll("BRG", ""));
@@ -53,6 +55,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
       }
       setState(() {});
     } catch (e) {
+      if (!mounted) return;
       _kodeController.text = "BRG001";
     }
   }
@@ -86,17 +89,18 @@ class _AddProductScreenState extends State<AddProductScreen> {
           'lokasi': _lokasiController.text.trim().isEmpty ? "-" : _lokasiController.text.trim(),
           'harga': int.tryParse(_hargaController.text) ?? 0,
           'stok': int.tryParse(_stokController.text) ?? 0,
-          'varian': _varianList, // Menyimpan array varian [HITAM - XL, UNGU - L]
+          'varian': _varianList, 
           'created_at': FieldValue.serverTimestamp(),
         });
 
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text("Produk berhasil disimpan ke Inventory!")),
-          );
-          Navigator.pop(context);
-        }
+        if (!mounted) return;
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Produk berhasil disimpan ke Inventory!")),
+        );
+        Navigator.pop(context);
       } catch (e) {
+        if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text("Gagal menyimpan data: $e")),
         );
@@ -160,7 +164,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
               // 3. Dropdown Kategori
               DropdownButtonFormField<String>(
-                value: _selectedCategory,
+                initialValue: _selectedCategory,
                 decoration: const InputDecoration(
                   labelText: "Pilih Kategori",
                   border: OutlineInputBorder(),
@@ -219,7 +223,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
               ),
               const SizedBox(height: 20),
 
-              // 6. FORM INPUTAN VARIAN (Sesuai Gambar 2)
+              // 6. FORM INPUTAN VARIAN
               const Text(
                 "Varian (Warna & Ukuran):",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.brown),

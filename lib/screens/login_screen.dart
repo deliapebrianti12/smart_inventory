@@ -18,7 +18,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _passwordController = TextEditingController();
   bool _isLoading = false;
   
-  // TAMBAHAN: State untuk mengatur sembunyikan/lihat password
+  // State untuk mengatur sembunyikan/lihat password
   bool _obscurePassword = true;
 
   // Fungsi Login Firebase + Ambil Role
@@ -32,12 +32,16 @@ class _LoginScreenState extends State<LoginScreen> {
           password: _passwordController.text.trim(),
         );
 
+        if (!mounted) return;
+
         // 2. Ambil Data User & Role dari Cloud Firestore
         String uid = userCredential.user!.uid;
         DocumentSnapshot userDoc = await FirebaseFirestore.instance
             .collection('users')
             .doc(uid)
             .get();
+
+        if (!mounted) return;
 
         UserModel loggedInUser;
 
@@ -65,6 +69,8 @@ class _LoginScreenState extends State<LoginScreen> {
           );
         }
       } on FirebaseAuthException catch (e) {
+        if (!mounted) return;
+
         String message = "Terjadi kesalahan login";
         if (e.code == 'user-not-found') {
           message = "Email tidak terdaftar.";
@@ -80,6 +86,8 @@ class _LoginScreenState extends State<LoginScreen> {
           SnackBar(content: Text(message), backgroundColor: Colors.red),
         );
       } catch (e) {
+        if (!mounted) return;
+
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text("Gagal memuat data hak akses: $e"), backgroundColor: Colors.orange),
         );
@@ -91,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void dispose() {
-    // TAMBAHAN: Membersihkan controller dari memori ketika screen ditutup
+    // Membersihkan controller dari memori ketika screen ditutup
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
@@ -133,7 +141,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 TextFormField(
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
-                  textInputAction: TextInputAction.next, // Menghubungkan fokus ke input berikutnya
+                  textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                     labelText: "Email Staf",
                     hintText: "admin@alsakina.com",
@@ -157,16 +165,15 @@ class _LoginScreenState extends State<LoginScreen> {
                 // Field Password
                 TextFormField(
                   controller: _passwordController,
-                  obscureText: _obscurePassword, // Menggunakan state dinamis
-                  textInputAction: TextInputAction.done, // Menandakan pengisian selesai
-                  onFieldSubmitted: (_) => _handleLogin(), // Menjalankan fungsi login jika klik enter/done di keyboard
+                  obscureText: _obscurePassword,
+                  textInputAction: TextInputAction.done,
+                  onFieldSubmitted: (_) => _handleLogin(),
                   decoration: InputDecoration(
                     labelText: "Password",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
                     prefixIcon: const Icon(Icons.lock_outline),
-                    // TAMBAHAN: Tombol Mata untuk Sembunyikan/Tampilkan sandi secara interaktif
                     suffixIcon: IconButton(
                       icon: Icon(
                         _obscurePassword ? Icons.visibility_off_outlined : Icons.visibility_outlined,

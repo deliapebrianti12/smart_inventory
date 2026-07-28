@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -44,7 +43,7 @@ class _ListProductScreenState extends State<ListProductScreen> {
         // Alur download otomatis jika dijalankan di Google Chrome / Browser
         final blob = html.Blob([qrBytes]);
         final url = html.Url.createObjectUrlFromBlob(blob);
-        final anchor = html.AnchorElement(href: url)
+        html.AnchorElement(href: url)
           ..setAttribute("download", namaFile)
           ..click();
         html.Url.revokeObjectUrl(url);
@@ -249,7 +248,7 @@ class _ListProductScreenState extends State<ListProductScreen> {
                       ],
                     ),
                   ),
-                  // PEMBATASAN AKSES TEKAN LAMA: Diubah ke data role asli milikmu
+                  // PEMBATASAN AKSES TEKAN LAMA
                   onLongPress: () {
                     if (isAdmin) {
                       _showEditDeleteOptions(context, doc.id, data);
@@ -270,7 +269,7 @@ class _ListProductScreenState extends State<ListProductScreen> {
         },
       ),
       
-      // PEMBATASAN AKSES FAB (+): Menggunakan status isAdmin berbasis role milikmu
+      // PEMBATASAN AKSES FAB (+)
       floatingActionButton: isAdmin
           ? FloatingActionButton(
               backgroundColor: Colors.brown[700],
@@ -349,7 +348,7 @@ class _ListProductScreenState extends State<ListProductScreen> {
                     TextField(controller: locationController, decoration: const InputDecoration(labelText: "Lokasi (Rak)")),
                     const SizedBox(height: 15),
                     DropdownButtonFormField<String>(
-                      value: tempCat,
+                      initialValue: tempCat,
                       decoration: const InputDecoration(labelText: "Kategori", border: OutlineInputBorder()),
                       items: categories.where((c) => c != "Semua").map((String value) {
                         return DropdownMenuItem<String>(value: value, child: Text(value));

@@ -5,8 +5,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/user_model.dart'; 
 import 'list_product_screen.dart'; 
 import 'add_product_screen.dart';  
-import 'scanner_screen.dart';      
-import 'history_screen.dart';      
+import 'scanner_screen.dart';       
+import 'history_screen.dart';       
 import 'report_screen.dart';       
 import 'login_screen.dart';        
 
@@ -183,7 +183,7 @@ class DashboardScreen extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: color.withOpacity(0.1),
+                color: color.withValues(alpha: 0.1),
                 shape: BoxShape.circle,
               ),
               child: Icon(icon, size: 40, color: color),
@@ -250,13 +250,17 @@ class _AddStaffScreenState extends State<AddStaffScreen> {
         } else if (e.code == 'invalid-email') {
           errMsg = "Format penulisan email salah.";
         }
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(errMsg), backgroundColor: Colors.red),
-        );
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(errMsg), backgroundColor: Colors.red),
+          );
+        }
       } catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Terjadi kesalahan teknis: $e"), backgroundColor: Colors.orange),
-        );
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("Terjadi kesalahan teknis: $e"), backgroundColor: Colors.orange),
+          );
+        }
       } finally {
         if (mounted) setState(() { _isLoading = false; });
       }

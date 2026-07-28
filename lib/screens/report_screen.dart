@@ -30,7 +30,7 @@ class _ReportScreenState extends State<ReportScreen> {
             children: [
               pw.Text("Laporan Stok Alsakina", style: pw.TextStyle(fontSize: 20, fontWeight: pw.FontWeight.bold)),
               pw.SizedBox(height: 20),
-              pw.Table.fromTextArray(
+              pw.TableHelper.fromTextArray(
                 context: context,
                 data: <List<String>>[
                   <String>['Nama Barang', 'Kategori', 'Lokasi', 'Stok'],
@@ -314,7 +314,7 @@ class _ReportScreenState extends State<ReportScreen> {
             ListView.separated(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              itemcount: produkKritis.length,
+              itemCount: produkKritis.length,
               separatorBuilder: (context, index) => const Divider(height: 15),
               itemBuilder: (context, index) {
                 var item = produkKritis[index];
