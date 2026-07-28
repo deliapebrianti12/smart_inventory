@@ -178,9 +178,6 @@ class _ReportScreenState extends State<ReportScreen> {
       ),
     );
   }
-
-  // [Sisa fungsi lainnya (_buildSummaryHeader, _infoCard, _buildCategorySection, dst) tetap sama seperti kode asli Anda]
-  // ... (biarkan fungsi-fungsi lainnya di bawah ini tidak berubah)
   
   Widget _buildSummaryHeader(int totalJenis, int totalPcs, int menipis, bool isWide) {
     return LayoutBuilder(
@@ -208,14 +205,14 @@ class _ReportScreenState extends State<ReportScreen> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 8, offset: const Offset(0, 4))],
-        border: Border.all(color: color.withOpacity(0.12), width: 1),
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 8, offset: const Offset(0, 4))],
+        border: Border.all(color: color.withValues(alpha: 0.12), width: 1),
       ),
       child: Row(
         children: [
           Container(
             padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(color: color.withOpacity(0.08), shape: BoxShape.circle),
+            decoration: BoxDecoration(color: color.withValues(alpha: 0.08), shape: BoxShape.circle),
             child: Icon(icon, color: color, size: 26),
           ),
           const SizedBox(width: 14),
@@ -241,7 +238,7 @@ class _ReportScreenState extends State<ReportScreen> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 8, offset: const Offset(0, 4))],
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.02), blurRadius: 8, offset: const Offset(0, 4))],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -251,7 +248,7 @@ class _ReportScreenState extends State<ReportScreen> {
           if (perKategori.isEmpty)
             const Padding(padding: EdgeInsets.symmetric(vertical: 20), child: Center(child: Text("Belum ada data barang.")))
           else
-            ...perKategori.entries.map((e) => _buildCategoryRow(e.key, e.value, totalStok)).toList(),
+            ...perKategori.entries.map((e) => _buildCategoryRow(e.key, e.value, totalStok)),
         ],
       ),
     );
@@ -285,7 +282,7 @@ class _ReportScreenState extends State<ReportScreen> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 8, offset: const Offset(0, 4))],
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.02), blurRadius: 8, offset: const Offset(0, 4))],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -317,7 +314,7 @@ class _ReportScreenState extends State<ReportScreen> {
             ListView.separated(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              itemCount: produkKritis.length,
+              itemcount: produkKritis.length,
               separatorBuilder: (context, index) => const Divider(height: 15),
               itemBuilder: (context, index) {
                 var item = produkKritis[index];
@@ -329,7 +326,7 @@ class _ReportScreenState extends State<ReportScreen> {
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Container(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4), decoration: BoxDecoration(color: Colors.red[50], borderRadius: BorderRadius.circular(8), border: Border.all(color: Colors.red.withOpacity(0.2))), child: Text("Sisa ${item['stok']}", style: TextStyle(color: Colors.red[700], fontWeight: FontWeight.bold))),
+                      Container(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4), decoration: BoxDecoration(color: Colors.red[50], borderRadius: BorderRadius.circular(8), border: Border.all(color: Colors.red.withValues(alpha: 0.2))), child: Text("Sisa ${item['stok']}", style: TextStyle(color: Colors.red[700], fontWeight: FontWeight.bold))),
                       const SizedBox(width: 8),
                       IconButton(icon: const Icon(Icons.arrow_circle_right_rounded, color: Colors.green, size: 28), tooltip: "Hubungi Supplier via WA", onPressed: () => _sendWhatsAppRestock(item['nama'], item['stok'])),
                     ],
