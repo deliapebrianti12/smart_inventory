@@ -1,6 +1,6 @@
 name: CI/CD Pipeline Inventory Busana Muslimah
 
-# Pipeline akan berjalan otomatis saat ada 'push' atau 'pull request' ke branch main
+# Workflow CI/CD berjalan otomatis saat ada push atau pull request ke branch utama
 on:
   push:
     branches: [ main, master ]
@@ -50,3 +50,6 @@ jobs:
         with:
           name: release-apk
           path: build/app/outputs/flutter-apk/app-release.apk
+          name: CI/CD Pipeline Inventory Busana Muslimah
+
+# Revisi konfigurasi workflow CI/CD oleh Delia
